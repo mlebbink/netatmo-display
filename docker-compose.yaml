@@ -11,3 +11,6 @@ php:
   image: php:7-fpm
   volumes:
     - ./website:/code
+    - ./env.conf:/usr/local/etc/php-fpm.d/env.conf
+  env_file: 
+    - php.env
