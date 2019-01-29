@@ -276,7 +276,7 @@ class NAApiClient
         // CURLE_SSL_CACERT || CURLE_SSL_CACERT_BADFILE
         if ($errno == 60 || $errno == 77)
         {
-            echo "WARNING ! SSL_VERIFICATION has been disabled since ssl error retrieved. Please check your certificate http://curl.haxx.se/docs/sslcerts.html\n".$errno;
+            echo "WARNING ! SSL_VERIFICATION has been disabled since ssl error retrieved. Please check your certificate http://curl.haxx.se/docs/sslcerts.html\n";
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
             $result = curl_exec($ch);
         }
@@ -338,7 +338,6 @@ class NAApiClient
             {
                 if($this->refresh_token)
                 {
-					//echo "Get Access Token From Refresh Token after expiry <br>";
                     return $this->getAccessTokenFromRefreshToken($this->refresh_token);//exception will be thrown otherwise
                 }
                 else
@@ -350,17 +349,14 @@ class NAApiClient
         }
         if($this->getVariable('code'))// grant_type == authorization_code.
         {
-			//echo "Get Access Token From Authorization Code <br>";
             return $this->getAccessTokenFromAuthorizationCode($this->getVariable('code'));
         }
         else if($this->refresh_token)// grant_type == refresh_token
         {
-			//echo "Get Access Token From Refresh Token <br>";
-            return $this->getAccessTokenFromRefreshToken($this->refresh_token);
+            return $this->getAccessTokenFromRefreshToken();
         }
         else if($this->getVariable('username') && $this->getVariable('password'))  //grant_type == password
         {
-            //echo "Get Access Token From Password <br>";
             return $this->getAccessTokenFromPassword($this->getVariable('username'), $this->getVariable('password'));
         }
         else throw new NAInternalErrorType("No access token stored");

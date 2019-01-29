@@ -1,7 +1,7 @@
 <?php
 
     //PHP version check
-    if (version_compare(PHP_VERSION, '5.3.0', '<'))
+    if (version_compare(PHP_VERSION, '5.4.0', '<'))
     {
         throw new Exception('Netatmo SDK requires PHP 5.3.0 or higher.');
     }

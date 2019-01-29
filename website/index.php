@@ -4,31 +4,36 @@
 	//ini_set('display_startup_errors', 1);
 	//error_reporting(E_ALL);
 
-	$clientId = "10101010acb39bc818e57892";
-	$clientSecret = "1010101010ababababababab";
-	$refreshToken = "ababababab|2727272727";
-	
 	// Haarlem
 	$lat = 52.3765;  // North
 	$long = 4.6486;  // East
+
+  //TODO:  Get lat+lon from openweatherdata
 	date_default_timezone_set("GMT");
 	$timeofday = dayOrNight($lat, $long);
-		
+
+	// TODO: rename yahoo.php to something more generic
+	include "inc/yahoo.php";
+  
 	require_once("Netatmo/autoload.php");
+  require_once ('Config.php');
+  //require_once ('Utils.php');
 	use Netatmo\Clients\NAWSApiClient;
 	use Netatmo\Exceptions\NAClientException;
-
+  $scope = Netatmo\Common\NAScopes::SCOPE_READ_STATION;
+ 
 	$config = array (
 		"client_id" => $clientId, 
 		"client_secret" => $clientSecret, 
-		"scope" => "read_station"
+    "username" => $username,
+    "password" => $password
 	);
 	$client = new NAWSApiClient($config);
 	
-	$value = array (
-		"refresh_token" => $refreshToken
-	);
-	$client->setTokensFromStore($value);
+	//$value = array (
+	//	"refresh_token" => $refreshToken
+	//);
+	//$client->setTokensFromStore($value);
 	
 	try
 	{
@@ -39,7 +44,7 @@
 	}
 	catch(Netatmo\Exceptions\NAClientException $ex)
 	{
-		echo "An error occured while trying to retrieve your tokens <br>".$ex;
+    echo "<b>An error occured while trying to retrieve your tokens </b><br>".$ex;
 	}
 	
 	// load data and use first available device
@@ -50,7 +55,6 @@
 	$rain = $device["modules"][1]["dashboard_data"];
 	
 	//include "inc/icon.php";
-	include "inc/yahoo.php";
 	
 	$css = "css/custom-medium.css";
 	if (isset($_GET["bw"]))
@@ -95,7 +99,7 @@
 		<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 </head>
-<body class="<?php echo $timeofday; ?>">
+<body class="<?php echo $timeofday; ?>"> 
 	<div class="container-fluid">
 		<div id="icon" class="row bg-primary" onclick="window.location.reload(true);">
 			<div id="rain" class="col-xs-4 text-center">
@@ -144,8 +148,8 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-6 text-center"><small>OUTDOOR</small><h2><?php echo $outdoorTempInt; ?><span><?php echo $outdoorTempFrac; ?></span>&#176; <small>C</small></h2></div>
-			<div class="col-xs-6 text-center"><small>INDOOR</small><h2><?php echo $indoorTempInt; ?><span><?php echo $indoorTempFrac; ?></span>&#176; <small>C</small></h2></div>
+			<div class="col-xs-6 text-center"><small>OUTDOOR</small><h2><?php echo $outdoorTempInt; ?><span><?php echo $outdoorTempFrac; ?></span> &#176;<small>C</small></h2></div>
+			<div class="col-xs-6 text-center"><small>INDOOR</small><h2><?php echo $indoorTempInt; ?><span><?php echo $indoorTempFrac; ?></span> &#176;<small>C</small></h2></div>
 		</div>
 		<div class="row">
 			<div class="col-xs-6 text-center"><small>PRESSURE</small><h3><?php echo round($indoor["Pressure"]); ?> <small>mbar</small></h3></div>
@@ -160,8 +164,7 @@
 <?php 
 		echo "Netatmo: \n";
 		print_r($data);
-		//echo "OpenWeatherMap: \n";
-		echo "Yahoo Weather: \n";
+		echo "OpenWeatherMap: \n";
 		print_r($obj);
 ?>
 	</pre>

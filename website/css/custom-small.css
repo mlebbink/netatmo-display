@@ -1,8 +1,10 @@
 html {background-color: #ccc;}
 body {
 	/* 2.7" E-ink screen */
-	width: 264px;
-	height: 176px;
+	/* width: 264px; */
+	/* height: 176px; */
+  width: 320px;
+  height: 240px;
 }
 .bg-primary {background-color: #777;}
 .container-fluid {padding: 0;}
