@@ -1,7 +1,6 @@
 html {background-color: #ccc;}
 body {
-	/* FeatherWing 2.4" 320x240 screen */
-	width: 640px;
+	width: 480px;
 	height: 320px;
 	font-size: 20px;
 	color: #666;
@@ -28,7 +27,12 @@ body {
 	color: #ff0000;
 }
 .h1, .h2, .h3, h1, h2, h3 {margin-top: 5px;}
+h1 {
+  font-size: 42px;
+  margin-top: 0;
+}
 h2 span {font-size: 60%;}
+h1 span {font-size: 60%;}
 small {
 	font-size: 65%;
 	color: #6699cc;
@@ -40,6 +44,7 @@ small {
 .row {
 	margin-left: 0;
 	margin-right: 0;
+  line-height: 1;
 }
 .h1 .small, .h1 small, .h2 .small, .h2 small, .h3 .small, .h3 small, .h4 .small, .h4 small, .h5 .small, .h5 small, .h6 .small, .h6 small, h1 .small, h1 small, h2 .small, h2 small, h3 .small, h3 small, h4 .small, h4 small, h5 .small, h5 small, h6 .small, h6 small {
 	color: #999 !important;
@@ -47,3 +52,15 @@ small {
 }
 .night .bg-primary {background-color: #003366;}
 .night small{color: #003366;}
+
+.no-gutter.row,
+.no-gutter.container,
+.no-gutter.container-fluid{
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.no-gutter>[class^="col-"]{
+  padding-left: 0;
+  padding-right: 0;
+}

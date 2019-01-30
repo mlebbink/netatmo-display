@@ -77,6 +77,7 @@
 	<link rel="icon" href="favicon.ico">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="<?php echo $css; ?>">
 	<!--[if lt IE 9]>
 		<script src="//oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -121,6 +122,23 @@
 	{
 		$outdoorTempFrac = "." . $outdoorTemp[1];
 	}
+
+  $outdoorMinTemp = explode(".", $outdoor["min_temp"]);
+	$outdoorMinTempInt = $outdoorMinTemp[0];
+	$outdoorMinTempFrac = "";
+	if (count($outdoorMinTemp) > 1) 
+	{
+		$outdoorMinTempFrac = "." . $outdoorMinTemp[1];
+	}
+  
+  $outdoorMaxTemp = explode(".", $outdoor["max_temp"]);
+	$outdoorMaxTempInt = $outdoorMaxTemp[0];
+	$outdoorMaxTempFrac = "";
+	if (count($outdoorMaxTemp) > 1) 
+	{
+		$outdoorMaxTempFrac = "." . $outdoorMaxTemp[1];
+	}
+
 	$indoorTemp = explode(".", $indoor["Temperature"]);
 	$indoorTempInt = $indoorTemp[0];
 	$indoorTempFrac = "";
@@ -131,13 +149,46 @@
 ?>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-xs-6 text-center"><small>OUTDOOR</small><h2><?php echo $outdoorTempInt; ?><span><?php echo $outdoorTempFrac; ?></span> &#176;<small>C</small></h2></div>
-			<div class="col-xs-6 text-center"><small>INDOOR</small><h2><?php echo $indoorTempInt; ?><span><?php echo $indoorTempFrac; ?></span> &#176;<small>C</small></h2></div>
-		</div>
+    <div class="row">
+      <div class="col-xs-6 text-center">
+        <small>OUTDOOR</small>
+        <div class="row">
+          <div class="col-xs-8 text-right"><h1><?php echo $outdoorTempInt; ?><span><?php echo $outdoorTempFrac; ?></span> &#176;<small>C</small></h1></div>
+          <div class="col-xs-4">
+            <div class="row">
+              <div class="col text-left"><small><i class="fa fa-sort-up"></i>&nbsp;<?php echo $outdoorMaxTempInt; ?><span style="font-size: 75%;"><?php echo $outdoorMaxTempFrac; ?></span>&nbsp;&#176;C</small></div>
+            </div>
+            <div class="row">
+              <div class="col text-left"><small><i class="fa fa-sort-down"></i>&nbsp;<?php echo $outdoorMinTempInt; ?><span style="font-size: 75%;"><?php echo $outdoorMinTempFrac; ?></span>&nbsp;&#176;C</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-6 text-center">
+        <small>INDOOR</small>
+        <div class="row">
+          <div class="col-xs-8 text-right"><h1><?php echo $indoorTempInt; ?><span><?php echo $indoorTempFrac; ?></span> &#176;<small>C</small></h1></div>
+          <div class="col-xs-4>
+            <div class="row">
+              <div class="col text-left"><small><i class="fa fa-sort-up"></i><?php echo $indoor["max_temp"]; ?> &#176;C</small></div>
+            </div>
+            <div class="row">
+              <div class="col text-left"><small><i class="fa fa-sort-down"></i><?php echo $indoor["min_temp"]; ?> &#176;C</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 		<div class="row">
 			<div class="col-xs-6 text-center"><small>PRESSURE</small><h3><?php echo round($indoor["Pressure"]); ?> <small>mbar</small></h3></div>
 			<div class="col-xs-6 text-center"><small>HUMIDITY</small><h2><?php echo $indoor["Humidity"]; ?> <small>%</small></h2></div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6 text-center"><small>NOISE</small><h3><?php echo round($indoor["Noise"]); ?> <small>dB</small></h3></div>
+			<div class="col-xs-6 text-center"><small>CO2</small><h2><?php echo $indoor["CO2"]; ?> <small>ppm</small></h2></div>
 		</div>
 	</div>	
 <?php  
