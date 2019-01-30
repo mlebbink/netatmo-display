@@ -1,7 +1,7 @@
 <?php
-	$appId = "1111111111";
+	$appId = $_SERVER['OPENWEATHERMAP_APIKEY'];
 	$apiUrl = "http://api.openweathermap.org/data/2.5/weather";
-	$cityId = "2755003";  // Haarlem, NL
+	$cityId = $_SERVER['CITY_ID'];
 		
 	$json = file_get_contents($apiUrl."?id=".$cityId."&appid=".$appId);
 	$obj = json_decode($json, true);
@@ -11,6 +11,7 @@
 	//$alt = $obj["weather"][0]["main"];
 	$alt = $obj["weather"][0]["description"];
 	//$iconUrl = "//openweathermap.org/img/w/".$icon.".png";
+
 
 	// http://openweathermap.org/weather-conditions#Icon-list
 	// http://erikflowers.github.io/weather-icons/	

@@ -1,23 +1,15 @@
 ﻿<!DOCTYPE html>
 <?php
-	//ini_set('display_errors', 1);
-	//ini_set('display_startup_errors', 1);
-	//error_reporting(E_ALL);
-
-	// Haarlem
-	$lat = 52.3765;  // North
-	$long = 4.6486;  // East
-
-  //TODO:  Get lat+lon from openweatherdata
+	include "inc/icon.php";
+  
+  $lat = $obj["coord"]["lat"];
+  $long = $obj["coord"]["lon"];
 	date_default_timezone_set("GMT");
 	$timeofday = dayOrNight($lat, $long);
 
-	// TODO: rename yahoo.php to something more generic
-	include "inc/yahoo.php";
-  
 	require_once("Netatmo/autoload.php");
   require_once ('Config.php');
-  //require_once ('Utils.php');
+
 	use Netatmo\Clients\NAWSApiClient;
 	use Netatmo\Exceptions\NAClientException;
   $scope = Netatmo\Common\NAScopes::SCOPE_READ_STATION;
@@ -30,17 +22,11 @@
 	);
 	$client = new NAWSApiClient($config);
 	
-	//$value = array (
-	//	"refresh_token" => $refreshToken
-	//);
-	//$client->setTokensFromStore($value);
-	
 	try
 	{
 		$tokens = $client->getAccessToken();
 		$refresh_token = $tokens["refresh_token"];
 		$access_token = $tokens["access_token"];
-		//echo "refresh_token=".$refresh_token." <br>";		
 	}
 	catch(Netatmo\Exceptions\NAClientException $ex)
 	{
@@ -53,8 +39,6 @@
 	$indoor = $device["dashboard_data"];
 	$outdoor = $device["modules"][0]["dashboard_data"];
 	$rain = $device["modules"][1]["dashboard_data"];
-	
-	//include "inc/icon.php";
 	
 	$css = "css/custom-medium.css";
 	if (isset($_GET["bw"]))

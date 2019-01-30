@@ -1,8 +1,8 @@
 html {background-color: #ccc;}
 body {
 	/* FeatherWing 2.4" 320x240 screen */
-	width: 320px;
-	height: 240px;
+	width: 640px;
+	height: 320px;
 	font-size: 20px;
 	color: #666;
 }
