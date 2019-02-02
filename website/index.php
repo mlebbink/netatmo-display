@@ -153,14 +153,14 @@
       <div class="col-xs-6 text-center">
         <small>OUTDOOR</small>
         <div class="row">
-          <div class="col-xs-8 text-right"><h1><?php echo $outdoorTempInt; ?><span><?php echo $outdoorTempFrac; ?></span>&#176;</h1></div>
-          <div class="col-xs-4">
-            <div class="row">
-              <div class="col text-left"><small><i class="fa fa-sort-up"></i>&nbsp;<?php echo $outdoorMaxTempInt; ?><span style="font-size: 75%;"><?php echo $outdoorMaxTempFrac; ?></span>&#176;</small></div>
-            </div>
-            <div class="row">
-              <div class="col text-left"><small><i class="fa fa-sort-down"></i>&nbsp;<?php echo $outdoorMinTempInt; ?><span style="font-size: 75%;"><?php echo $outdoorMinTempFrac; ?></span>&#176;</small></div>
-            </div>
+          <div class="col-xs-12 text-center"><h1 style="font-size:96px"><?php echo $outdoorTempInt; ?><span><?php echo $outdoorTempFrac; ?></span><small>&#176;</small></h1></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 text-center">
+            <small>
+              <i class="fa fa-sort-up"></i>&nbsp;<?php echo $outdoorMaxTempInt; ?><span style="font-size: 75%;"><?php echo $outdoorMaxTempFrac; ?></span>&#176;
+              <i class="fa fa-sort-down"></i>&nbsp;<?php echo $outdoorMinTempInt; ?><span style="font-size: 75%;"><?php echo $outdoorMinTempFrac; ?></span>&#176;
+            </small>
           </div>
         </div>
       </div>
@@ -168,14 +168,14 @@
       <div class="col-xs-6 text-center">
         <small>INDOOR</small>
         <div class="row">
-          <div class="col-xs-8 text-right"><h1><?php echo $indoorTempInt; ?><span><?php echo $indoorTempFrac; ?></span>&#176;</h1></div>
-          <div class="col-xs-4>
-            <div class="row">
-              <div class="col text-left"><small><i class="fa fa-sort-up"></i><?php echo $indoor["max_temp"]; ?>&#176;</small></div>
-            </div>
-            <div class="row">
-              <div class="col text-left"><small><i class="fa fa-sort-down"></i><?php echo $indoor["min_temp"]; ?>&#176;</small></div>
-            </div>
+          <div class="col-xs-12 text-center"><h1 style="font-size:96px"><?php echo $indoorTempInt; ?><span><?php echo $indoorTempFrac; ?></span><small>&#176;</small></h1></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 text-center">
+            <small>
+              <i class="fa fa-sort-up"></i><?php echo $indoor["max_temp"]; ?>&#176;
+              <i class="fa fa-sort-down"></i><?php echo $indoor["min_temp"]; ?>&#176;
+            </small>
           </div>
         </div>
       </div>
